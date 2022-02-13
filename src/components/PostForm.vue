@@ -38,10 +38,8 @@
 
 <style scoped>
 .form {
-  margin-bottom: 40px;
   padding: 10px;
   display: flex;
   flex-direction: column;
-  background-color: whitesmoke;
 }
 </style>

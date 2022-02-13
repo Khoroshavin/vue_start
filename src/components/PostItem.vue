@@ -34,6 +34,6 @@ export default {
   align-items: center;
   justify-content: space-between;
   border: 2px solid #41B883;
-  border-radius: 20px;
+  border-radius: 15px;
 }
 </style>
