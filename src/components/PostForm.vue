@@ -19,7 +19,7 @@
       return {
         post: {
           title: '',
-          description: '',
+          body: '',
         }
       }
     },
@@ -29,7 +29,7 @@
       this.$emit('create', this.post)
       this.post = {
           title: '',
-          description: '',
+          body: '',
         }
       },
     }

@@ -23,7 +23,7 @@
 .btn-mt {
   margin-top: 15px;
 }
-.btn-mtbb {
-  margin: 15px 0 30px 0;
+.btn-mtbbr {
+  margin: 15px 10px 30px 0;
 }
 </style>

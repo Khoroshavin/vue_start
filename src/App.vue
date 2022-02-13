@@ -3,14 +3,16 @@
   <h1>Page with posts</h1>
   <my-button 
     @click="showModal"
-    class="btn-mtbb">
+    class="btn-mtbbr">
     Add post
   </my-button>
   
   <post-list 
     :posts="posts"
     @remove="removePost"
+    v-if="!isPostsLoading"
   />
+  <div v-else>Loading...</div>
 
   <my-modal v-model:show="modalVisible">
     <post-form
@@ -27,6 +29,7 @@
 // импортируем компоненты
 import PostForm from "@/components/PostForm";
 import PostList from "@/components/PostList";
+import axios    from "axios";
 
 export default {
   // регистрируем компоненты
@@ -35,12 +38,9 @@ export default {
   },
   data() {
     return{
-      posts: [
-        {id: 1, title: 'Post about JS 1', description: 'JavaScript 1 Lorem ipsum dolor sit amet consectetur adipisicing elit.'},
-        {id: 2, title: 'Post about JS 2', description: 'JavaScript 2 Lorem ipsum dolor sit amet consectetur adipisicing elit.'},
-        {id: 3, title: 'Post about JS 3', description: 'JavaScript 3 Lorem ipsum dolor sit amet consectetur adipisicing elit.'},
-      ],
+      posts: [],
       modalVisible: false,
+      isPostsLoading: false,
     }
   },
   methods: {
@@ -53,7 +53,24 @@ export default {
     },
     showModal() {
       this.modalVisible = true;
-    }
+    },
+    async fetchPosts() {
+      try { 
+        this.isPostsLoading = true;
+          const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10');
+          this.posts = response.data;
+      }
+      catch (error) {
+        alert('Error' + error)
+      }
+      finally {
+        this.isPostsLoading = false;
+      }
+
+    },
+  },
+  mounted() {
+    this.fetchPosts();
   },
 }
 </script>
