@@ -33,5 +33,4 @@ export default {
   border: 2px solid #41B883;
   border-radius: 20px;
 }
-
 </style>

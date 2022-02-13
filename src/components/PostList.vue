@@ -6,7 +6,6 @@
       :post="post"
     />
   </div>
-
 </template>
 
 <script>

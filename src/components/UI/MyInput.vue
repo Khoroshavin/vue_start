@@ -1,0 +1,18 @@
+<template>
+  <input class="input" type="text">
+</template>
+
+<script>
+  export default {
+    name: 'my-input',
+  }
+</script>
+
+<style scoped>
+.input {
+  margin-top: 20px;
+  padding: 10px 15px;
+  border: 1px solid #34495E;
+  width: 100%;
+}
+</style>
