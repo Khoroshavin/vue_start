@@ -20,10 +20,6 @@
 .btn-right {
   align-self: flex-end;
 }
-.btn-mt {
-  margin-top: 15px;
-}
-.btn-mtbbr {
-  margin: 15px 10px 30px 0;
-}
+
+
 </style>

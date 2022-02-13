@@ -1,14 +1,21 @@
 <template>
   <div class="app">
   <h1>Page with posts</h1>
-  <my-button 
-    @click="showModal"
-    class="btn-mtbbr">
-    Add post
-  </my-button>
+
+  <div class="app__btns">
+    <my-button 
+      @click="showModal"
+      class="btn">
+      Add post
+    </my-button>
+    <my-select
+      v-model="selectedSort"
+      v-bind:options="sortOptions"
+    />
+  </div>
   
   <post-list 
-    :posts="posts"
+    :posts="sortedPosts"
     @remove="removePost"
     v-if="!isPostsLoading"
   />
@@ -41,6 +48,11 @@ export default {
       posts: [],
       modalVisible: false,
       isPostsLoading: false,
+      selectedSort: '',
+      sortOptions: [
+        {value: 'title', name: 'Sort by title'},
+        {value: 'body', name: 'Sort by description'}
+      ],
     }
   },
   methods: {
@@ -72,6 +84,16 @@ export default {
   mounted() {
     this.fetchPosts();
   },
+  computed: {
+    sortedPosts() {
+      return [...this.posts].sort((post1, post2) => {
+        return post1[this.selectedSort]?.localeCompare(post2[this.selectedSort])
+      })
+    }
+  },
+  watch: {
+    
+  }
 }
 </script>
 <style>
@@ -86,5 +108,11 @@ export default {
   margin: 0 auto;
   max-width: 1200px;
   padding: 20px;
+}
+
+.app__btns {
+  margin: 15px 0 30px;
+  display: flex;
+  justify-content: space-between;
 }
 </style>
