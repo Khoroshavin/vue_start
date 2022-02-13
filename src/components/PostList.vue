@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Post list</h3>
+    <h1>Post list</h1>
     <post-item
       v-for="post in posts"
       :post="post"
@@ -23,10 +23,5 @@ import PostItem from './PostItem.vue'
 </script>
 
 <style scoped>
-.post {
-  margin-top: 20px;
-  padding: 15px;
-  border: 2px solid #41B883;
-  border-radius: 20px;
-}
+
 </style>
