@@ -1,7 +1,7 @@
 <template>
   <div class="post" v-for="post in posts">
     <div><strong>Title: </strong>{{ post.title }}</div>
-    <div><strong>Description: </strong>{{ post.desc }}</div>
+    <div><strong>Description: </strong>{{ post.description }}</div>
   </div>
 </template>
 

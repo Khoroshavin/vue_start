@@ -31,9 +31,11 @@
     methods: {
       createPost() {
       this.post.id = Date.now();
-      this.posts.push(newPost);
-      this.title= '';
-      this.description= '';
+      this.$emit('create', this.post)
+      this.post = {
+          title: '',
+          description: '',
+        }
       },
     },
   }
@@ -41,9 +43,11 @@
 
 <style scoped>
 .form {
-  margin-bottom: 50px;
+  margin-bottom: 40px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
+  background-color: whitesmoke;
 }
 .input {
   margin-top: 20px;

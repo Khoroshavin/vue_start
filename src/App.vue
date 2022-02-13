@@ -1,8 +1,12 @@
 <template>
   <div class="app">
   <!-- подключаем компоненты -->
-  <post-form/>
-  <post-list :posts="posts"/>
+  <post-form
+    @create='createPost'
+  />
+  <post-list 
+    :posts="posts"
+  />
 
 
   </div>
@@ -22,22 +26,15 @@ export default {
   data() {
     return{
       posts: [
-        {id: 1, title: 'Post about JS 1', desc: 'JavaScript 1 Lorem ipsum dolor sit amet consectetur adipisicing elit.'},
-        {id: 2, title: 'Post about JS 2', desc: 'JavaScript 2 Lorem ipsum dolor sit amet consectetur adipisicing elit.'},
-        {id: 3, title: 'Post about JS 3', desc: 'JavaScript 3 Lorem ipsum dolor sit amet consectetur adipisicing elit.'},
+        {id: 1, title: 'Post about JS 1', description: 'JavaScript 1 Lorem ipsum dolor sit amet consectetur adipisicing elit.'},
+        {id: 2, title: 'Post about JS 2', description: 'JavaScript 2 Lorem ipsum dolor sit amet consectetur adipisicing elit.'},
+        {id: 3, title: 'Post about JS 3', description: 'JavaScript 3 Lorem ipsum dolor sit amet consectetur adipisicing elit.'},
       ],
     }
   },
   methods: {
-    createPost() {
-      const newPost = {
-        id: Date.now(),
-        title: this.title,
-        desc: this.description,
-      }
-      this.posts.push(newPost);
-      this.title= '';
-      this.description= '';
+    createPost(post) {
+      this.posts.push(post)
     },
   },
 }
