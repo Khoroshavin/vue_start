@@ -2,6 +2,11 @@
   <div class="app">
   <h1>Page with posts</h1>
 
+  <my-input
+    v-model="searchQuery"
+    placeholder="Search"
+  />
+
   <div class="app__btns">
     <my-button 
       @click="showModal"
@@ -15,7 +20,7 @@
   </div>
   
   <post-list 
-    :posts="sortedPosts"
+    :posts="sortedAndSearchedPosts"
     @remove="removePost"
     v-if="!isPostsLoading"
   />
@@ -31,24 +36,23 @@
   </div>
 </template>
 
-
 <script>
 // импортируем компоненты
 import PostForm from "@/components/PostForm";
 import PostList from "@/components/PostList";
 import axios    from "axios";
+import MyInput from './components/UI/MyInput.vue';
 
 export default {
   // регистрируем компоненты
-  components: {
-    PostForm, PostList
-  },
+  components: {PostForm, PostList},
   data() {
     return{
       posts: [],
       modalVisible: false,
       isPostsLoading: false,
       selectedSort: '',
+      searchQuery: '',
       sortOptions: [
         {value: 'title', name: 'Sort by title'},
         {value: 'body', name: 'Sort by description'}
@@ -89,6 +93,9 @@ export default {
       return [...this.posts].sort((post1, post2) => {
         return post1[this.selectedSort]?.localeCompare(post2[this.selectedSort])
       })
+    },
+    sortedAndSearchedPosts() {
+      return this.sortedPosts.filter(post => post.title.toLowerCase().includes(this.searchQuery.toLowerCase()))
     }
   },
   watch: {
