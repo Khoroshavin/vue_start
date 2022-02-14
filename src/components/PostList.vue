@@ -43,7 +43,7 @@ import PostItem from './PostItem.vue'
 .post-list-enter-from,
 .post-list-leave-to {
   opacity: 0;
-  transform: translateX(130px);
+  transform: translateY(50px);
 }
 
 .post-list-move {
