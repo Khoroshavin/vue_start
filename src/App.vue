@@ -26,6 +26,20 @@
   />
   <div v-else>Loading...</div>
 
+  <div class="page__wrapper">
+    <div
+      v-for="pageNum in totalPages"
+      :key="pageNum"
+      class="page"
+      :class="{
+        'page-curent': page === pageNum
+      }"
+      @click="changePage(pageNum)"
+      >
+      {{ pageNum }}
+      </div>
+  </div>
+
   <my-modal v-model:show="modalVisible">
     <post-form
       @create='createPost'
@@ -41,7 +55,6 @@
 import PostForm from "@/components/PostForm";
 import PostList from "@/components/PostList";
 import axios    from "axios";
-import MyInput from './components/UI/MyInput.vue';
 
 export default {
   // регистрируем компоненты
@@ -53,9 +66,12 @@ export default {
       isPostsLoading: false,
       selectedSort: '',
       searchQuery: '',
+      page: 1,
+      limit: '10',
+      totalPages: 0,
       sortOptions: [
         {value: 'title', name: 'Sort by title'},
-        {value: 'body', name: 'Sort by description'}
+        {value: 'body', name: 'Sort by description'},
       ],
     }
   },
@@ -70,10 +86,20 @@ export default {
     showModal() {
       this.modalVisible = true;
     },
+    changePage(pageNum) {
+      this.page = pageNum;
+      this.fetchPosts()
+    },
     async fetchPosts() {
       try { 
         this.isPostsLoading = true;
-          const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10');
+          const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
+            params: {
+              _page: this.page,
+              _limit: this.limit
+            }
+          });
+          this.totalPages = Math.ceil(response.headers['x-total-count'] / this.limit);
           this.posts = response.data;
       }
       catch (error) {
@@ -121,5 +147,22 @@ export default {
   margin: 15px 0 30px;
   display: flex;
   justify-content: space-between;
+}
+
+.page__wrapper {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.page {
+  margin: 5px;
+  padding: 10px;
+  border: 1px solid #41B883;
+}
+
+.page-curent {
+  background-color: #41B883;
+  color: #fff;
 }
 </style>

@@ -18,6 +18,7 @@
     data() {
       return {
         post: {
+          id: '',
           title: '',
           body: '',
         }
