@@ -4,6 +4,8 @@ import { createApp } from 'vue'
 import App from './App'
 // импорт компонентов глобально зарегистрированных
 import components from '@/components/UI';
+// импорт роутера
+import router from '@/router/router';
 
 const app = createApp(App)
 
@@ -12,4 +14,4 @@ components.forEach(component => {
 });
 
 // создание и монтирование приложения в #app
-app.mount('#app')
+app.use(router).mount('#app')

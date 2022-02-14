@@ -20,6 +20,12 @@
 .btn-right {
   align-self: flex-end;
 }
+.btn-mt {
+  margin-top: 15px;
+}
 
+.btn-mr {
+  margin-right: 10px;
+}
 
 </style>
